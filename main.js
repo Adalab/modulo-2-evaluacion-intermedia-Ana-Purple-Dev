@@ -1,8 +1,12 @@
 'use strict';
+let countLight = 0;
+let countDark = 0;
 
 const selectEl = document.querySelector('.js-select');
 const btnEl = document.querySelector('.js-btn');
 const textEl = document.querySelector('.js-text');
+const textCountLightEl = document.querySelector('.js-countLight');
+const textCountDarkEl = document.querySelector('.js-countDark');
 
 const arrayDark = [
   {
@@ -38,8 +42,12 @@ function battleResultPaint(valueSelectedLight, valueDark) {
 
   if (valueSelectedLight > valueDark.force) {
     textEl.innerHTML = '¡Ha ganado el Ejército del Bien!Enhorabuena.';
+    countLight += 1;
+    textCountLightEl.innerHTML = countLight;
   } else if (valueSelectedLight < valueDark.force) {
     textEl.innerHTML = '¡Ha ganado el Ejército del Mal!Vuelve a intentarlo.';
+    countDark += 1;
+    textCountDarkEl.innerHTML = countDark;
   } else if (valueSelectedLight === valueDark.force) {
     textEl.innerHTML = '¡Empate!';
   }
