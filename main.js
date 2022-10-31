@@ -4,7 +4,7 @@ const selectEl = document.querySelector('.js-select');
 const btnEl = document.querySelector('.js-btn');
 const textEl = document.querySelector('.js-text');
 
-const arrayMal = [
+const arrayDark = [
   {
     nameBad: 'Sureños malos',
     force: 2,
@@ -26,31 +26,29 @@ const arrayMal = [
     force: 5,
   },
 ];
-function getRandomNumberFromArray(array) {
-  const randomNumber = Math.ceil(Math.random() * array.length);
-  const result = array[randomNumber];
+function getRandomNumberFromArray(arr) {
+  const randomNumber = Math.floor(Math.random() * arr.length);
+  const result = arr[randomNumber];
   return result;
 }
 
-const randomNumberMal = getRandomNumberFromArray(arrayMal);
+function battleResultPaint(valueSelectedLight, valueDark) {
+  console.log({ valueSelectedLight });
+  console.log(valueDark.force);
 
-function getValue() {
-  const selectValue = selectEl.value;
-  return selectValue;
-}
-function battleResultPaint() {
-  if (selectValue > randomNumberMal.force) {
+  if (valueSelectedLight > valueDark.force) {
     textEl.innerHTML = '¡Ha ganado el Ejército del Bien!Enhorabuena.';
-  } else if (selectValue < randomNumberMal.force) {
+  } else if (valueSelectedLight < valueDark.force) {
     textEl.innerHTML = '¡Ha ganado el Ejército del Mal!Vuelve a intentarlo.';
-  } else if (selectValue === randomNumberMal.force) {
+  } else if (valueSelectedLight === valueDark.force) {
     textEl.innerHTML = '¡Empate!';
   }
 }
 function handleClick(event) {
   event.preventDefault();
-  getValue();
-  battleResultPaint();
+  const randomNumberDark = getRandomNumberFromArray(arrayDark);
+  const selectValue = parseInt(selectEl.value);
+  battleResultPaint(selectValue, randomNumberDark);
 }
 
 btnEl.addEventListener('click', handleClick);
